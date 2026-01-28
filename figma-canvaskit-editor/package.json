@@ -1,0 +1,12 @@
+{
+  "name": "figma-canvaskit-editor",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "pnpm --filter ./packages/web dev",
+    "build:web": "pnpm --filter ./packages/web build",
+    "build:plugin": "pnpm --filter ./packages/figma-plugin build"
+  }
+}
