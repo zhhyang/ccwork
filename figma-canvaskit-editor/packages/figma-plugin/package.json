@@ -1,0 +1,13 @@
+{
+  "name": "figma-canvaskit-plugin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.82.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.0"
+  }
+}
