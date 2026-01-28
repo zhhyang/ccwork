@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Export Selection</title>
+    <style>
+      body {
+        font-family: Inter, sans-serif;
+        margin: 16px;
+      }
+      button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="export">Export Selection</button>
+    <script>
+      const button = document.getElementById('export');
+      button.addEventListener('click', () => {
+        parent.postMessage({ pluginMessage: { type: 'EXPORT_SELECTION' } }, '*');
+      });
+
+      window.onmessage = (event) => {
+        const { type, payload } = event.data.pluginMessage || {};
+        if (type === 'DOWNLOAD') {
+          const blob = new Blob([payload], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'scene.json';
+          link.click();
+          URL.revokeObjectURL(url);
+        }
+      };
+    </script>
+  </body>
+</html>
