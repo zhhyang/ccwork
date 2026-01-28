@@ -1,4 +1,5 @@
 import type { CanvasKit } from 'canvaskit-wasm';
+import CanvasKitInit from 'canvaskit-wasm';
 
 export interface CanvasKitContext {
   CanvasKit: CanvasKit;
@@ -7,13 +8,7 @@ export interface CanvasKitContext {
 }
 
 export async function initCanvasKit(canvas: HTMLCanvasElement): Promise<CanvasKitContext> {
-  const CanvasKitInit = (await import('/canvaskit/canvaskit.js')).default as (
-    settings: { locateFile: (file: string) => string },
-  ) => Promise<CanvasKit>;
-
-  const CanvasKit = await CanvasKitInit({
-    locateFile: (file) => `/canvaskit/${file}`,
-  });
+  const CanvasKit = await CanvasKitInit();
 
   const surface = CanvasKit.MakeCanvasSurface(canvas);
   if (!surface) {
